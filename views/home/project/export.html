@@ -406,8 +406,11 @@
                 withQuotes: true
             };
             if(val != ""){
-
-                $('.json-view-response-show').JSONView(JSON.parse(val),options);
+                try{
+                    $('.json-view-response-show').JSONView(JSON.parse(val),options);
+                }catch (e) {
+                    console.log(e)
+                }
             }
         });
         $(".json-view-request-hidden").each(function () {
@@ -420,8 +423,11 @@
                 withQuotes: true
             };
             if(val != ""){
-
-                $('.json-view-request-show').JSONView(JSON.parse(val),options);
+                try{
+                    $('.json-view-request-show').JSONView(JSON.parse(val),options);
+                }catch (e) {
+                    console.log(e)
+                }
             }
         });
         $(".home-parent").on('click',function () {
