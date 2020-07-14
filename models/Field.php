@@ -192,6 +192,9 @@ class Field extends Model
             $array = array($array);
         }
 
+        if(!is_array($array)) {
+            return [];
+        }
         foreach ($array as $key => $item) {
             $id = rand_id();
             $type = gettype($item);
@@ -238,7 +241,7 @@ class Field extends Model
     }
 
 
-    public static function compareMergeResponseArray(array $new, array $old): array
+    public static function compareMergeResponseArray(array $new, array $old)
     {
         foreach ($new as $key => $item) {
             if (!isset($old[$key])) {
@@ -256,14 +259,14 @@ class Field extends Model
         return $old;
     }
 
-    public function getRequestJson(): string
+    public function getRequestJson()
     {
         //$this->request_fields = '[{"id":"2","parent_id":"0","level":"0","name":"retcode","title":"错误码","type":"string","example_value":"000000","remark":""},{"id":"3","parent_id":"0","level":"0","name":"desc","title":"接口信息","type":"string","example_value":"操作成功","remark":""},{"id":"4","parent_id":"0","level":"0","name":"biz","title":"返回主体内容","type":"object","example_value":"","remark":""},{"id":"10","parent_id":"4","level":"1","name":"settleDate","title":"结算日期","type":"string","example_value":"","remark":""},{"id":"6","parent_id":"4","level":"1","name":"records","title":"列表","type":"array","example_value":"","remark":""},{"id":"8","parent_id":"6","level":"2","name":"0","title":"key","type":"object","example_value":"","remark":""},{"id":"10","parent_id":"8","level":"3","name":"incomeTypeStr","title":"结算描述符","type":"string","example_value":"incomeTypeStr","remark":""},{"id":"10","parent_id":"8","level":"3","name":"incomeType","title":"结算类型","type":"integer","example_value":"1","remark":""},{"id":"9","parent_id":"8","level":"3","name":"amount","title":"结算金额","type":"string","example_value":"","remark":""},{"id":"5","parent_id":"4","level":"1","name":"totalAmount","title":"总数","type":"float","example_value":"","remark":""}]';
         $req = json_decode($this->request_fields, true);
         return json_encode($this->getRequestParams($req));
     }
 
-    public function getResponseJson(): string
+    public function getResponseJson()
     {
         $req = json_decode($this->response_fields, true);
 
@@ -276,7 +279,7 @@ class Field extends Model
      * @param $request
      * @return array
      */
-    private function getRequestParams($array): array
+    private function getRequestParams($array)
     {
         if (!$array) {
             return [];

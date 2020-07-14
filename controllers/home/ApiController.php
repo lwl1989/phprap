@@ -70,6 +70,8 @@ class ApiController extends PublicController
                     $curl->get($request_url);
                     break;
                 case 'post':
+                    echo '<pre>';
+                    var_dump($request_params, $request->post('request'));exit();
                     $curl->post($request_url, $request_params);
                     break;
                 case 'put':
@@ -381,6 +383,7 @@ class ApiController extends PublicController
                         break;
                     case 'integer':
                         $value = intval($request['example_value'][$index]);
+                        var_dump($request['name'][$index]);
                         $this->getValueFromRequest($request, $params, $index, $value);
                         break;
                     case 'float':

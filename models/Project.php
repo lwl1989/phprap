@@ -44,7 +44,7 @@ class Project extends Model
 
             [['type', 'sort'], 'filter', 'filter' => 'intval'], //此规则必须，否则就算模型里该字段没有修改，也会出现在脏属性里
             [['encode_id'], 'string', 'max' => 50],
-            [['title', 'remark'], 'string', 'max' => 250],
+            [['title'], 'string', 'max' => 250],
             [['encode_id'], 'unique'],
 
             [['created_at', 'updated_at'], 'safe'],
@@ -126,7 +126,7 @@ class Project extends Model
             'id'   => SORT_DESC
         ];
 
-        return $this->hasMany(Module::className(), ['project_id' => 'id'])->where($filter)->orderBy($order);
+        return $this->hasMany(Module::className(), ['project_id' => 'id'])->where($filter)->orderBy($order)->limit(1);
     }
 
     /**
